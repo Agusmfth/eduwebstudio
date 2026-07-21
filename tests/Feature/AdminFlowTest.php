@@ -28,6 +28,19 @@ class AdminFlowTest extends TestCase
         $this->assertDatabaseHas('content_items', ['section' => 'services', 'title' => 'Layanan Baru']);
     }
 
+    public function test_admin_can_open_and_update_settings(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user)->get('/admin/pengaturan')->assertOk();
+        $this->actingAs($user)->put('/admin/pengaturan', [
+            'brand' => 'EduWeb Studio', 'hero_badge' => 'Spesialis Website Pendidikan',
+            'hero_title' => 'Website sekolah profesional', 'hero_text' => 'Deskripsi hero yang cukup.',
+            'whatsapp' => '62895321272932', 'whatsapp_secondary' => '628131951083',
+            'email' => 'hello@example.test', 'address' => 'Jakarta',
+            'cta_title' => 'Mari mulai', 'cta_text' => 'Konsultasi gratis untuk sekolah.',
+        ])->assertRedirect();
+    }
+
     public function test_visitor_can_submit_consultation(): void
     {
         $this->post('/konsultasi', [
