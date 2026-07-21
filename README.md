@@ -30,3 +30,27 @@ Segera ubah akun/password sebelum dipasang ke server produksi.
 - Kotak masuk permintaan konsultasi
 
 File `landing-page-original.html` adalah arsip landing page statis sebelum migrasi.
+
+## Deployment Railway
+
+Gunakan database PostgreSQL/MySQL terpisah untuk data dashboard. Jangan gunakan SQLite produksi karena filesystem container Railway tidak persisten.
+
+Variable minimum pada service aplikasi:
+
+```env
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://domain-anda.com
+APP_KEY=base64:...
+DB_CONNECTION=pgsql
+DATABASE_URL=${{Postgres.DATABASE_URL}}
+FILESYSTEM_DISK=public
+```
+
+Untuk menjaga gambar hasil upload setelah restart/redeploy, tambahkan Railway Volume dengan mount path:
+
+```text
+/var/www/html/storage/app/public
+```
+
+Dockerfile otomatis menjalankan `storage:link` dan `migrate --force` ketika service dimulai.

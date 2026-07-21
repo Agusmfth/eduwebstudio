@@ -28,4 +28,4 @@ RUN mkdir -p storage/framework/cache \
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "php artisan config:clear && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"]
+CMD ["sh", "-c", "php artisan config:clear && php artisan storage:link 2>/dev/null || true; php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"]
