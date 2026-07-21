@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EduWeb Studio menyediakan jasa pembuatan website profesional untuk sekolah, pesantren, kampus, dan lembaga pendidikan." />
+  <title>EduWeb Studio — Jasa Website Sekolah Profesional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #0f172a;
+      --accent: #14b8a6;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.2; margin: 0; }
+    p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button, input, textarea, select { font: inherit; }
+
+    .container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .section { padding: 100px 0; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .section-title { font-size: clamp(32px, 4vw, 52px); margin-top: 18px; letter-spacing: -0.04em; }
+    .section-subtitle { color: var(--muted); max-width: 680px; margin-top: 18px; font-size: 18px; }
+
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      transition: .3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .navbar.scrolled { background: rgba(255,255,255,.92); backdrop-filter: blur(16px); border-color: var(--border); }
+    .nav-wrap { height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 800; }
+    .brand-logo {
+      width: 42px; height: 42px; border-radius: 14px;
+      display: grid; place-items: center; color: white; font-weight: 900;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 10px 25px rgba(37,99,235,.25);
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; font-weight: 700; font-size: 14px; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta { padding: 12px 20px; border-radius: 12px; background: var(--secondary); color: white !important; }
+    .menu-btn { display: none; border: 0; background: white; width: 44px; height: 44px; border-radius: 12px; font-size: 22px; }
+
+    .hero {
+      min-height: 100vh;
+      padding: 150px 0 90px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background:
+        radial-gradient(circle at 12% 15%, rgba(37,99,235,.13), transparent 28%),
+        radial-gradient(circle at 88% 25%, rgba(20,184,166,.12), transparent 25%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: auto 0 0; height: 120px;
+      background: linear-gradient(to top, var(--bg), transparent);
+      pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 70px; align-items: center; }
+    .hero h1 { font-size: clamp(44px, 6vw, 76px); letter-spacing: -0.055em; margin: 24px 0; }
+    .hero h1 span { color: var(--primary); }
+    .hero-text { color: var(--muted); font-size: 19px; max-width: 650px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+    .btn {
+      border: 0; cursor: pointer; border-radius: 14px; padding: 15px 24px;
+      display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+      font-weight: 800; transition: .25s ease;
+    }
+    .btn-primary { background: var(--primary); color: white; box-shadow: 0 16px 35px rgba(37,99,235,.25); }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+    .btn-secondary { background: white; border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+    .hero-proof { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 36px; color: var(--muted); font-size: 14px; font-weight: 700; }
+    .hero-proof span { display: flex; align-items: center; gap: 8px; }
+    .hero-proof i { color: var(--accent); font-style: normal; }
+
+    .browser {
+      background: white;
+      border: 1px solid rgba(148,163,184,.3);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transform: rotate(1.3deg);
+      position: relative;
+    }
+    .browser::before {
+      content: ''; position: absolute; width: 180px; height: 180px; border-radius: 50%;
+      background: rgba(37,99,235,.13); filter: blur(6px); top: -80px; right: -70px;
+    }
+    .browser-top { height: 52px; display: flex; align-items: center; gap: 7px; padding: 0 18px; background: #f8fafc; border-bottom: 1px solid var(--border); }
+    .browser-top i { width: 10px; height: 10px; border-radius: 50%; background: #cbd5e1; }
+    .browser-content { padding: 22px; }
+    .school-nav { display: flex; align-items: center; justify-content: space-between; padding: 8px 4px 18px; }
+    .school-brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 14px; }
+    .school-logo { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, #2563eb, #14b8a6); }
+    .school-menu { display: flex; gap: 12px; color: #94a3b8; font-size: 9px; }
+    .school-hero { background: linear-gradient(135deg, #0f172a, #1e40af); border-radius: 18px; padding: 34px 28px; color: white; min-height: 255px; position: relative; overflow: hidden; }
+    .school-hero::after { content: ''; position: absolute; width: 170px; height: 170px; border-radius: 50%; right: -45px; bottom: -65px; background: rgba(255,255,255,.12); }
+    .school-hero h3 { font-size: 29px; max-width: 330px; }
+    .school-hero p { font-size: 11px; opacity: .78; margin-top: 12px; max-width: 280px; }
+    .mini-btn { display: inline-block; background: white; color: #1d4ed8; border-radius: 8px; padding: 8px 13px; font-size: 9px; font-weight: 800; margin-top: 18px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+    .mini-card { border: 1px solid var(--border); border-radius: 13px; padding: 14px; }
+    .mini-card strong { font-size: 18px; display: block; }
+    .mini-card span { color: var(--muted); font-size: 9px; }
+    .floating-badge { position: absolute; right: -20px; bottom: 30px; z-index: 3; background: white; padding: 15px 18px; border-radius: 16px; box-shadow: 0 15px 35px rgba(15,23,42,.18); font-size: 13px; font-weight: 800; }
+    .floating-badge small { display: block; color: var(--muted); font-weight: 600; }
+
+    .trust { padding: 24px 0 0; }
+    .trust-wrap { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 24px 30px; display: flex; align-items: center; justify-content: space-between; gap: 30px; box-shadow: 0 12px 30px rgba(15,23,42,.05); }
+    .trust-wrap p { color: var(--muted); font-weight: 700; }
+    .logo-list { display: flex; flex-wrap: wrap; gap: 26px; color: #94a3b8; font-weight: 900; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 48px; }
+    .service-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; transition: .3s ease; }
+    .service-card:hover { transform: translateY(-8px); box-shadow: 0 24px 50px rgba(15,23,42,.09); border-color: rgba(37,99,235,.35); }
+    .service-icon { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; background: rgba(37,99,235,.1); font-size: 24px; }
+    .service-card h3 { font-size: 21px; margin: 22px 0 12px; }
+    .service-card p { color: var(--muted); }
+
+    .portfolio { background: var(--secondary); color: white; }
+    .portfolio .section-subtitle { color: #94a3b8; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .project-card { background: #162033; border: 1px solid rgba(255,255,255,.08); border-radius: 24px; overflow: hidden; transition: .3s ease; }
+    .project-card:hover { transform: translateY(-8px); border-color: rgba(96,165,250,.35); }
+    .project-image { height: 260px; padding: 18px; background: linear-gradient(145deg, #dbeafe, #f8fafc); }
+    .project-image.alt { background: linear-gradient(145deg, #ccfbf1, #f8fafc); }
+    .project-image.orange { background: linear-gradient(145deg, #ffedd5, #f8fafc); }
+    .mock-page { width: 100%; height: 100%; border-radius: 15px; background: white; overflow: hidden; box-shadow: 0 16px 35px rgba(15,23,42,.16); }
+    .mock-top { height: 25px; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; }
+    .mock-hero { height: 105px; margin: 12px; border-radius: 10px; background: linear-gradient(135deg, #2563eb, #0f172a); }
+    .mock-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; padding: 0 12px; }
+    .mock-box { height: 55px; background: #f1f5f9; border-radius: 8px; }
+    .project-info { padding: 24px; }
+    .project-info small { color: #60a5fa; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .project-info h3 { font-size: 22px; margin: 8px 0; }
+    .project-info p { color: #94a3b8; font-size: 14px; }
+
+    .why-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: center; }
+    .feature-panel { background: linear-gradient(145deg, #1d4ed8, #0f172a); padding: 36px; border-radius: 30px; color: white; min-height: 470px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow); }
+    .feature-panel h3 { font-size: 34px; max-width: 400px; }
+    .panel-stat { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .panel-stat div { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 20px; }
+    .panel-stat strong { font-size: 31px; display: block; }
+    .panel-stat span { color: #bfdbfe; font-size: 13px; }
+    .feature-list { display: grid; gap: 18px; margin-top: 34px; }
+    .feature-item { display: grid; grid-template-columns: 50px 1fr; gap: 16px; align-items: start; }
+    .feature-num { width: 50px; height: 50px; border-radius: 15px; display: grid; place-items: center; background: white; border: 1px solid var(--border); font-weight: 900; color: var(--primary); }
+    .feature-item h4 { font-size: 18px; margin-bottom: 6px; }
+    .feature-item p { color: var(--muted); }
+
+    .process { background: white; }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 48px; }
+    .process-card { padding: 28px; border: 1px solid var(--border); border-radius: 22px; position: relative; }
+    .process-card::after { content: '→'; position: absolute; top: 38px; right: -15px; color: #cbd5e1; font-size: 22px; z-index: 2; }
+    .process-card:last-child::after { display: none; }
+    .process-card strong { font-size: 45px; color: #dbeafe; }
+    .process-card h3 { font-size: 19px; margin: 10px 0; }
+    .process-card p { color: var(--muted); font-size: 14px; }
+
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 48px; align-items: stretch; }
+    .price-card { background: white; border: 1px solid var(--border); border-radius: 26px; padding: 32px; position: relative; }
+    .price-card.popular { border: 2px solid var(--primary); transform: scale(1.03); box-shadow: 0 22px 55px rgba(37,99,235,.14); }
+    .popular-label { position: absolute; right: 22px; top: -14px; background: var(--primary); color: white; padding: 7px 13px; border-radius: 999px; font-size: 11px; font-weight: 900; }
+    .price-card h3 { font-size: 22px; }
+    .price-card > p { color: var(--muted); margin-top: 8px; min-height: 52px; }
+    .price { margin: 24px 0; font-size: 40px; font-weight: 900; letter-spacing: -.04em; }
+    .price small { font-size: 14px; color: var(--muted); font-weight: 600; }
+    .price-list { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 11px; color: #475569; }
+    .price-list li::before { content: '✓'; color: var(--accent); font-weight: 900; margin-right: 9px; }
+    .price-card .btn { width: 100%; }
+
+    .testimonial-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; margin-top: 48px; }
+    .quote-card { background: var(--secondary); color: white; border-radius: 28px; padding: 40px; }
+    .quote-card blockquote { margin: 0; font-size: 25px; font-weight: 700; line-height: 1.55; }
+    .quote-person { display: flex; align-items: center; gap: 14px; margin-top: 30px; }
+    .avatar { width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); }
+    .quote-person small { color: #94a3b8; }
+    .rating-card { background: white; border: 1px solid var(--border); border-radius: 28px; padding: 36px; display: flex; flex-direction: column; justify-content: center; }
+    .rating-card strong { font-size: 68px; letter-spacing: -.05em; }
+    .stars { color: #f59e0b; font-size: 25px; letter-spacing: 4px; }
+    .rating-card p { color: var(--muted); margin-top: 8px; }
+
+    .faq-wrap { display: grid; grid-template-columns: .75fr 1.25fr; gap: 70px; align-items: start; }
+    .faq-list { display: grid; gap: 12px; }
+    .faq-item { background: white; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
+    .faq-question { padding: 20px 22px; display: flex; justify-content: space-between; gap: 20px; cursor: pointer; font-weight: 800; }
+    .faq-answer { max-height: 0; overflow: hidden; color: var(--muted); transition: max-height .3s ease; padding: 0 22px; }
+    .faq-item.active .faq-answer { max-height: 180px; padding-bottom: 20px; }
+    .faq-item.active .faq-question span { transform: rotate(45deg); }
+    .faq-question span { transition: .3s ease; font-size: 24px; }
+
+    .cta { padding: 0 0 100px; }
+    .cta-card { background: linear-gradient(135deg, #1d4ed8, #0f172a); color: white; border-radius: 34px; padding: 55px; display: grid; grid-template-columns: 1fr auto; gap: 35px; align-items: center; position: relative; overflow: hidden; }
+    .cta-card::after { content: ''; position: absolute; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,.08); right: -100px; top: -110px; }
+    .cta-card h2 { font-size: clamp(30px, 4vw, 48px); max-width: 700px; }
+    .cta-card p { color: #bfdbfe; margin-top: 14px; }
+    .cta-card .btn { position: relative; z-index: 2; background: white; color: var(--primary-dark); }
+
+    footer { background: #0b1220; color: white; padding: 70px 0 30px; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, .7fr); gap: 50px; }
+    .footer-brand p { color: #94a3b8; max-width: 380px; margin-top: 18px; }
+    footer h4 { margin-bottom: 18px; }
+    footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; color: #94a3b8; }
+    footer a:hover { color: white; }
+    .copyright { border-top: 1px solid rgba(255,255,255,.08); margin-top: 50px; padding-top: 26px; color: #64748b; display: flex; justify-content: space-between; gap: 20px; font-size: 13px; }
+
+    .whatsapp { position: fixed; right: 22px; bottom: 22px; z-index: 50; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: #22c55e; color: white; font-size: 26px; box-shadow: 0 15px 35px rgba(34,197,94,.3); }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; position: absolute; left: 20px; right: 20px; top: 76px; padding: 24px; border-radius: 18px; background: white; box-shadow: var(--shadow); flex-direction: column; align-items: flex-start; }
+      .nav-links.open { display: flex; }
+      .menu-btn { display: block; }
+      .hero-grid, .why-grid, .faq-wrap, .testimonial-grid { grid-template-columns: 1fr; }
+      .hero-grid { gap: 45px; }
+      .browser { max-width: 680px; margin: 0 auto; }
+      .services-grid, .portfolio-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-card:nth-child(2)::after { display: none; }
+      .footer-grid { grid-template-columns: 1.2fr 1fr 1fr; }
+      .footer-grid > div:last-child { grid-column: 2 / -1; }
+    }
+
+    @media (max-width: 680px) {
+      .container { width: min(100% - 28px, 1180px); }
+      .section { padding: 72px 0; }
+      .hero { padding-top: 125px; }
+      .hero h1 { font-size: 43px; }
+      .hero-actions .btn { width: 100%; }
+      .trust-wrap { align-items: flex-start; flex-direction: column; }
+      .services-grid, .portfolio-grid, .pricing-grid, .process-grid, .footer-grid { grid-template-columns: 1fr; }
+      .process-card::after { display: none; }
+      .price-card.popular { transform: none; }
+      .cta-card { grid-template-columns: 1fr; padding: 36px 26px; }
+      .cta-card .btn { width: 100%; }
+      .panel-stat { grid-template-columns: 1fr 1fr; }
+      .footer-grid > div:last-child { grid-column: auto; }
+      .copyright { flex-direction: column; }
+      .floating-badge { right: -4px; bottom: 16px; }
+      .school-menu { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home"><span class="brand-logo">E</span> EduWeb Studio</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#layanan">Layanan</a>
+        <a href="#portofolio">Portofolio</a>
+        <a href="#proses">Proses</a>
+        <a href="#harga">Harga</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontak" class="nav-cta">Konsultasi Gratis</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Buka menu">☰</button>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Spesialis Website Pendidikan</span>
+        <h1>Website sekolah yang <span>modern</span>, terpercaya, dan mudah dikelola.</h1>
+        <p class="hero-text">Kami membantu sekolah, pesantren, kampus, dan lembaga pendidikan memiliki website profesional untuk meningkatkan citra, menyampaikan informasi, dan mempermudah komunikasi dengan siswa serta orang tua.</p>
+        <div class="hero-actions">
+          <a href="#kontak" class="btn btn-primary">Mulai Konsultasi <span>→</span></a>
+          <a href="#portofolio" class="btn btn-secondary">Lihat Portofolio</a>
+        </div>
+        <div class="hero-proof">
+          <span><i>✓</i> Desain responsif</span>
+          <span><i>✓</i> Mudah dikelola</span>
+          <span><i>✓</i> Support & maintenance</span>
+        </div>
+      </div>
+
+      <div style="position:relative">
+        <div class="browser">
+          <div class="browser-top"><i></i><i></i><i></i></div>
+          <div class="browser-content">
+            <div class="school-nav">
+              <div class="school-brand"><span class="school-logo"></span> SMAN Harapan Bangsa</div>
+              <div class="school-menu"><span>Beranda</span><span>Profil</span><span>Akademik</span><span>Kontak</span></div>
+            </div>
+            <div class="school-hero">
+              <h3>Mewujudkan Generasi Unggul dan Berkarakter</h3>
+              <p>Lingkungan belajar modern untuk membentuk siswa berprestasi, kreatif, dan siap menghadapi masa depan.</p>
+              <span class="mini-btn">Jelajahi Sekolah</span>
+            </div>
+            <div class="stats-grid">
+              <div class="mini-card"><strong>1.250+</strong><span>Siswa Aktif</span></div>
+              <div class="mini-card"><strong>78</strong><span>Tenaga Pendidik</span></div>
+              <div class="mini-card"><strong>24</strong><span>Ekstrakurikuler</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="floating-badge">⚡ Cepat & Responsif<small>Optimal di semua perangkat</small></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="trust">
+    <div class="container trust-wrap">
+      <p>Dipercaya berbagai lembaga pendidikan</p>
+      <div class="logo-list"><span>SEKOLAHKU</span><span>EDUCARE</span><span>GENCER</span><span>AKADEMIA</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="layanan">
+    <div class="container">
+      <span class="eyebrow">Layanan Kami</span>
+      <h2 class="section-title">Semua kebutuhan website sekolah dalam satu layanan.</h2>
+      <p class="section-subtitle">Dari perencanaan sampai website tayang, kami siapkan solusi lengkap yang sesuai kebutuhan dan identitas sekolah Anda.</p>
+      <div class="services-grid">
+        <article class="service-card"><div class="service-icon">🎨</div><h3>Desain Website Custom</h3><p>Tampilan eksklusif sesuai identitas, warna, visi, dan karakter sekolah.</p></article>
+        <article class="service-card"><div class="service-icon">📱</div><h3>Responsif Semua Perangkat</h3><p>Nyaman diakses melalui komputer, tablet, maupun smartphone.</p></article>
+        <article class="service-card"><div class="service-icon">📰</div><h3>Berita & Pengumuman</h3><p>Kelola informasi sekolah, agenda, prestasi, dan pengumuman dengan mudah.</p></article>
+        <article class="service-card"><div class="service-icon">🎓</div><h3>PPDB Online</h3><p>Formulir pendaftaran siswa baru yang praktis, rapi, dan terintegrasi.</p></article>
+        <article class="service-card"><div class="service-icon">🔎</div><h3>SEO & Google Friendly</h3><p>Struktur website dioptimalkan agar lebih mudah ditemukan di Google.</p></article>
+        <article class="service-card"><div class="service-icon">🛠️</div><h3>Maintenance & Support</h3><p>Dukungan teknis, backup, keamanan, dan pembaruan website secara berkala.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section portfolio" id="portofolio">
+    <div class="container">
+      <span class="eyebrow">Portofolio Pilihan</span>
+      <h2 class="section-title">Website yang tidak hanya bagus, tetapi juga bekerja.</h2>
+      <p class="section-subtitle">Contoh konsep website pendidikan yang kami rancang dengan fokus pada kemudahan akses, kredibilitas, dan pengalaman pengguna.</p>
+      <div class="portfolio-grid">
+        <article class="project-card"><div class="project-image"><div class="mock-page"><div class="mock-top"></div><div class="mock-hero"></div><div class="mock-row"><div class="mock-box"></div><div class="mock-box"></div><div class="mock-box"></div></div></div></div><div class="project-info"><small>Sekolah Menengah</small><h3>SMAN Harapan Bangsa</h3><p>Website profil sekolah, berita, agenda, dan galeri kegiatan.</p></div></article>
+        <article class="project-card"><div class="project-image alt"><div class="mock-page"><div class="mock-top"></div><div class="mock-hero" style="background:linear-gradient(135deg,#0f766e,#14b8a6)"></div><div class="mock-row"><div class="mock-box"></div><div class="mock-box"></div><div class="mock-box"></div></div></div></div><div class="project-info"><small>Pesantren</small><h3>Pesantren Al-Hikmah</h3><p>Profil pesantren, program pendidikan, pendaftaran, dan donasi.</p></div></article>
+        <article class="project-card"><div class="project-image orange"><div class="mock-page"><div class="mock-top"></div><div class="mock-hero" style="background:linear-gradient(135deg,#ea580c,#f59e0b)"></div><div class="mock-row"><div class="mock-box"></div><div class="mock-box"></div><div class="mock-box"></div></div></div></div><div class="project-info"><small>Sekolah Dasar</small><h3>SD Kreativa Nusantara</h3><p>Website ceria, informatif, dan ramah untuk orang tua siswa.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container why-grid">
+      <div class="feature-panel">
+        <div><span class="eyebrow" style="background:rgba(255,255,255,.12);color:white">Mengapa Kami</span><h3 style="margin-top:20px">Partner digital untuk pertumbuhan sekolah Anda.</h3></div>
+        <div class="panel-stat"><div><strong>50+</strong><span>Proyek selesai</span></div><div><strong>4.9/5</strong><span>Kepuasan klien</span></div><div><strong>99%</strong><span>Website uptime</span></div><div><strong>7 Hari</strong><span>Support aktif</span></div></div>
+      </div>
+      <div>
+        <span class="eyebrow">Keunggulan</span>
+        <h2 class="section-title">Dirancang khusus untuk kebutuhan lembaga pendidikan.</h2>
+        <div class="feature-list">
+          <div class="feature-item"><span class="feature-num">01</span><div><h4>Administrasi mudah</h4><p>Admin sekolah dapat mengubah berita, galeri, halaman, dan pengumuman tanpa coding.</p></div></div>
+          <div class="feature-item"><span class="feature-num">02</span><div><h4>Desain kredibel dan profesional</h4><p>Meningkatkan kepercayaan calon siswa, orang tua, alumni, dan masyarakat.</p></div></div>
+          <div class="feature-item"><span class="feature-num">03</span><div><h4>Keamanan dan performa terjaga</h4><p>Website dioptimalkan agar cepat, aman, dan stabil saat diakses banyak pengunjung.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process" id="proses">
+    <div class="container">
+      <span class="eyebrow">Proses Kerja</span>
+      <h2 class="section-title">Proses sederhana, hasil maksimal.</h2>
+      <p class="section-subtitle">Kami melibatkan Anda di setiap tahap agar hasil akhir benar-benar sesuai kebutuhan sekolah.</p>
+      <div class="process-grid">
+        <article class="process-card"><strong>01</strong><h3>Konsultasi</h3><p>Kami pelajari kebutuhan, target, fitur, dan identitas sekolah.</p></article>
+        <article class="process-card"><strong>02</strong><h3>Desain</h3><p>Kami buat rancangan tampilan modern dan mudah dipahami.</p></article>
+        <article class="process-card"><strong>03</strong><h3>Pengembangan</h3><p>Desain diubah menjadi website responsif dan berfungsi penuh.</p></article>
+        <article class="process-card"><strong>04</strong><h3>Peluncuran</h3><p>Website diuji, dipublikasikan, dan diserahkan bersama panduan.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="harga">
+    <div class="container">
+      <span class="eyebrow">Paket Harga</span>
+      <h2 class="section-title">Pilih paket sesuai kebutuhan sekolah.</h2>
+      <p class="section-subtitle">Harga dapat disesuaikan berdasarkan fitur, jumlah halaman, integrasi, dan kebutuhan khusus.</p>
+      <div class="pricing-grid">
+        <article class="price-card"><h3>Paket Basic</h3><p>Cocok untuk sekolah yang membutuhkan website profil sederhana.</p><div class="price">Rp2,5jt <small>/ proyek</small></div><ul class="price-list"><li>5 halaman utama</li><li>Desain responsif</li><li>Form kontak</li><li>Domain & hosting 1 tahun</li><li>Support 30 hari</li></ul><a href="#kontak" class="btn btn-secondary">Pilih Paket</a></article>
+        <article class="price-card popular"><span class="popular-label">Paling Populer</span><h3>Paket Professional</h3><p>Solusi lengkap untuk sekolah dengan kebutuhan informasi aktif.</p><div class="price">Rp4,9jt <small>/ proyek</small></div><ul class="price-list"><li>Hingga 12 halaman</li><li>Berita & pengumuman</li><li>Galeri & agenda</li><li>Admin dashboard</li><li>SEO dasar</li><li>Support 90 hari</li></ul><a href="#kontak" class="btn btn-primary">Pilih Paket</a></article>
+        <article class="price-card"><h3>Paket Custom</h3><p>Untuk sekolah yang membutuhkan fitur khusus dan integrasi lengkap.</p><div class="price">Custom <small>sesuai kebutuhan</small></div><ul class="price-list"><li>PPDB online</li><li>Integrasi pembayaran</li><li>Portal siswa/guru</li><li>Multi bahasa</li><li>Fitur khusus lainnya</li></ul><a href="#kontak" class="btn btn-secondary">Konsultasikan</a></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:white">
+    <div class="container">
+      <span class="eyebrow">Testimoni</span>
+      <h2 class="section-title">Dipercaya oleh sekolah yang ingin berkembang.</h2>
+      <div class="testimonial-grid">
+        <div class="quote-card"><blockquote>“Tim EduWeb sangat memahami kebutuhan sekolah kami. Hasil websitenya modern, cepat, dan memudahkan staf dalam mengelola informasi.”</blockquote><div class="quote-person"><span class="avatar"></span><div><strong>Budi Santoso, M.Pd.</strong><small>Kepala Sekolah SMAN Harapan Bangsa</small></div></div></div>
+        <div class="rating-card"><strong>4.9</strong><div class="stars">★★★★★</div><p>Rata-rata kepuasan dari klien kami berdasarkan kualitas desain, komunikasi, dan layanan purna jual.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container faq-wrap">
+      <div><span class="eyebrow">FAQ</span><h2 class="section-title">Pertanyaan yang sering ditanyakan.</h2><p class="section-subtitle">Temukan jawaban singkat sebelum memulai proyek website sekolah Anda.</p></div>
+      <div class="faq-list">
+        <div class="faq-item active"><div class="faq-question">Berapa lama proses pembuatan website?<span>+</span></div><div class="faq-answer">Rata-rata 2–4 minggu, tergantung jumlah halaman, kelengkapan materi, dan fitur yang dibutuhkan.</div></div>
+        <div class="faq-item"><div class="faq-question">Apakah sekolah bisa mengubah konten sendiri?<span>+</span></div><div class="faq-answer">Bisa. Kami menyediakan dashboard admin dan panduan penggunaan agar staf sekolah dapat mengelola konten dengan mudah.</div></div>
+        <div class="faq-item"><div class="faq-question">Apakah sudah termasuk domain dan hosting?<span>+</span></div><div class="faq-answer">Paket Basic dan Professional sudah termasuk domain serta hosting selama satu tahun.</div></div>
+        <div class="faq-item"><div class="faq-question">Apakah menerima desain dan fitur khusus?<span>+</span></div><div class="faq-answer">Ya. Kami dapat menyesuaikan desain, fitur PPDB, portal siswa, pembayaran, dan integrasi lainnya.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="kontak">
+    <div class="container">
+      <div class="cta-card">
+        <div><h2>Siap membuat website sekolah yang lebih profesional?</h2><p>Konsultasikan kebutuhan Anda dan dapatkan rekomendasi paket terbaik tanpa biaya.</p></div>
+        <a href="https://wa.me/6281234567890?text=Halo%20EduWeb%20Studio,%20saya%20ingin%20konsultasi%20website%20sekolah" class="btn" target="_blank" rel="noopener">Hubungi via WhatsApp →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><a class="brand" href="#home"><span class="brand-logo">E</span> EduWeb Studio</a><p>Jasa pembuatan website profesional untuk sekolah, pesantren, kampus, dan lembaga pendidikan di Indonesia.</p></div>
+        <div><h4>Menu</h4><ul><li><a href="#layanan">Layanan</a></li><li><a href="#portofolio">Portofolio</a></li><li><a href="#harga">Harga</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+        <div><h4>Layanan</h4><ul><li>Website Sekolah</li><li>PPDB Online</li><li>Maintenance</li><li>SEO Website</li></ul></div>
+        <div><h4>Kontak</h4><ul><li>hello@eduwebstudio.id</li><li>+62 812-3456-7890</li><li>Jakarta, Indonesia</li></ul></div>
+      </div>
+      <div class="copyright"><span>© 2026 EduWeb Studio. All rights reserved.</span><span>Privacy Policy · Terms of Service</span></div>
+    </div>
+  </footer>
+
+  <a class="whatsapp" href="https://wa.me/6281234567890" target="_blank" rel="noopener" aria-label="WhatsApp">☏</a>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+    menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+    document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => {
+        document.querySelectorAll('.faq-item').forEach(other => { if (other !== item) other.classList.remove('active'); });
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

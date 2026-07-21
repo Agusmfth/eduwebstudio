@@ -1,0 +1,34 @@
+:root{--display:"Sora",sans-serif;--ink:#0b0f14;--paper:#f7f7f5;--blue:#315ee7;--lime:#d7f15b}
+body{font-family:"DM Sans",sans-serif;background:var(--paper)}
+h1,h2,h3,.brand{font-family:var(--display);letter-spacing:-.045em}
+em{font-family:var(--display)!important;font-style:normal!important;font-weight:600!important;letter-spacing:-.055em}
+
+/* Contemporary display treatment */
+.hero-main h1{font-family:var(--display);font-weight:600;letter-spacing:-.06em;line-height:1.01}
+.hero-main h1 em{display:inline;color:var(--blue);position:relative}
+.hero-main h1 em:after{content:"";position:absolute;left:2px;right:1px;bottom:-4px;height:3px;border-radius:99px;background:var(--blue);opacity:.18}
+.availability,.section-index,.preview-caption,.package-type,.footer-label{font-family:var(--display);font-weight:600;letter-spacing:.14em}
+.button,.nav-contact,.text-link{font-family:var(--display);letter-spacing:-.02em}
+
+.section-head h2,.approach h2,.pricing-heading h2,.faq-intro h2{font-family:var(--display);font-weight:500;letter-spacing:-.055em;line-height:1.05}
+.section-head h2 em,.approach h2 em,.pricing-heading h2 em,.faq-intro h2 em{color:var(--blue)}
+.row-num,.feature-line>span,.process-card>span,.package-number{font-family:var(--display)!important;font-style:normal!important;font-weight:500;letter-spacing:-.05em}
+.service-title h3,.work-info h3,.feature-line h3,.process-card h3,.pricing-card h3{font-family:var(--display);font-weight:600}
+
+/* Refined light and dark rhythm */
+.navbar.scrolled{background:rgba(247,247,245,.9);box-shadow:0 8px 30px rgba(11,15,20,.04)}
+.hero{background:radial-gradient(circle at 73% 26%,#e3e8db 0,transparent 25%),linear-gradient(180deg,#fafaf8 0,#f3f3ef 100%)}
+.work{background:#0b0f14}.testimonial-section{background:#111824}.client-strip,footer{background:#0b0f14}
+.process{background:#ecece8}.pricing{background:#fff}
+.work-card{border:1px solid transparent}.work-card:hover{border-color:#ffffff14;background:#ffffff08}
+.pricing-card.recommended{background:#101722;border-color:#101722}
+.recommended-label{background:var(--lime)}
+.contact-card{background:#101722;border-radius:22px;overflow:hidden;box-shadow:0 30px 70px rgba(11,15,20,.14)}
+.form-wrap{border-radius:15px}
+
+/* Quote no longer looks editorial-old */
+.quote-mark{font-family:var(--display);font-weight:500;color:var(--lime)}
+.testimonial-wrap blockquote{font-family:var(--display);font-style:normal;font-weight:400;letter-spacing:-.045em;line-height:1.25}
+.proof-grid strong,.hero-rating strong,.package-price strong{font-family:var(--display)}
+
+@media(max-width:600px){.hero-main h1{font-size:41px;letter-spacing:-.055em}.section-head h2,.approach h2,.pricing-heading h2,.faq-intro h2{font-size:36px}}
