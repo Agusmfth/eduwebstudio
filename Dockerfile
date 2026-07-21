@@ -1,18 +1,12 @@
-FROM php:8.3-apache
+FROM php:8.3-cli
 
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
-    libpq-dev \
     libzip-dev \
+    libpq-dev \
     && docker-php-ext-install pdo pdo_mysql pdo_pgsql zip \
     && rm -rf /var/lib/apt/lists/*
-
-RUN rm -f /etc/apache2/mods-enabled/mpm_event.load \
-    /etc/apache2/mods-enabled/mpm_event.conf \
-    /etc/apache2/mods-enabled/mpm_worker.load \
-    /etc/apache2/mods-enabled/mpm_worker.conf \
-    && a2enmod mpm_prefork rewrite
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
@@ -25,17 +19,13 @@ RUN composer install \
     --optimize-autoloader \
     --no-interaction
 
-RUN chown -R www-data:www-data storage bootstrap/cache \
+RUN mkdir -p storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/views \
+    storage/logs \
+    bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
 
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+EXPOSE 8080
 
-RUN sed -ri \
-    -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
-    /etc/apache2/sites-available/*.conf \
-    /etc/apache2/apache2.conf \
-    /etc/apache2/conf-available/*.conf
-
-EXPOSE 80
-
-CMD ["apache2-foreground"]
+CMD ["sh", "-c", "php artisan config:clear && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"]
